@@ -1,0 +1,21 @@
+Hugo_Symbol	Ensembl_ID	Chromosome	Tumor_TPM	Normal_TPM	Log2_FC	Regulation	Pathway	Clinical_Relevance
+KRAS	ENSG00000133703	12	198.4	89.2	1.15	Upregulated	RAS/MAPK signaling	G12D mutation; moderately elevated
+MYC	ENSG00000136997	8	112.3	41.3	1.44	Upregulated	Cell proliferation	Mild elevation; early-stage consistent
+EGFR	ENSG00000146648	7	98.4	67.1	0.55	Neutral	RTK signaling	Near normal
+SMAD4	ENSG00000141646	18	167.3	187.3	-0.16	Neutral	TGF-beta pathway	Wild-type; retained
+CDKN2A	ENSG00000147889	9	54.3	142.8	-1.40	Downregulated	Cell cycle regulation	Heterozygous loss; partial reduction
+TP53	ENSG00000141510	17	102.3	98.4	0.06	Neutral	DNA damage response	Wild-type; near normal
+VEGFA	ENSG00000112715	6	98.4	54.2	0.86	Neutral	Angiogenesis	Mild; early-stage consistent
+MMP9	ENSG00000100985	20	54.3	28.7	0.92	Neutral	ECM remodeling	Limited invasion signals
+CDH1	ENSG00000039068	16	178.4	201.4	-0.18	Neutral	Cell adhesion (EMT)	Retained E-cadherin; no EMT
+VIM	ENSG00000026025	10	78.3	67.8	0.21	Neutral	Cytoskeleton (EMT)	No mesenchymal transition
+EPCAM	ENSG00000119888	2	398.4	312.4	0.35	Neutral	Epithelial marker	Strongly retained — epithelial phenotype
+GATA6	ENSG00000141448	18	287.3	187.3	0.62	Upregulated	Classical subtype marker	High GATA6 = classical subtype
+KRT17	ENSG00000128422	17	38.4	34.2	0.16	Neutral	Basal-like subtype marker	Low = classical subtype confirmed
+TGFBR2	ENSG00000163513	3	34.2	187.3	-2.45	Downregulated	TGF-beta receptor	Missense mutation; reduced expression
+SPARC	ENSG00000113140	5	112.3	78.4	0.52	Neutral	Tumor microenvironment	Mild stromal involvement
+ACTA2	ENSG00000107796	10	134.2	89.3	0.59	Neutral	Cancer-associated fibroblasts	Mild desmoplasia
+IL6	ENSG00000136244	7	42.3	24.7	0.78	Neutral	Inflammatory signaling	Low inflammation — good prognosis signal
+PDCD1	ENSG00000188389	2	14.2	18.7	-0.40	Neutral	Immune checkpoint (PD-1)	Low
+CD274	ENSG00000120217	9	18.4	14.2	0.37	Neutral	Immune checkpoint (PD-L1)	Low immune evasion
+ERBB2	ENSG00000141736	17	62.4	54.3	0.20	Neutral	HER2 signaling	Not altered

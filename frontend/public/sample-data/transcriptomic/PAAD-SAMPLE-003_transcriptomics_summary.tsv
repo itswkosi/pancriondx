@@ -1,0 +1,2 @@
+patient_id	molecular_subtype	total_genes_analyzed	upregulated_count	downregulated_count	neutral_count	tumor_purity	ras_pathway_score	tgfb_pathway_score	cell_cycle_score	emt_score	immune_score	mtor_score	transcriptomic_risk	notes
+PAAD-SAMPLE-003	Classical	20	2	2	16	0.51	3.4	2.8	3.1	1.2	1.8	2.9	Low-Moderate	Early-stage profile; retained epithelial markers; minimal EMT; low immune evasion; best prognosis of cohort

@@ -1,0 +1,92 @@
+{
+  "panel_name": "PDAC_Core_Genes",
+  "description": "Strict pancreatic ductal adenocarcinoma gene panel for mutation-based risk modeling",
+  "genes": [
+    {
+      "gene_symbol": "KRAS",
+      "category": "core_driver",
+      "pathway": "MAPK_signaling",
+      "priority": 1
+    },
+    {
+      "gene_symbol": "TP53",
+      "category": "tumor_suppressor",
+      "pathway": "cell_cycle_apoptosis",
+      "priority": 1
+    },
+    {
+      "gene_symbol": "SMAD4",
+      "category": "tumor_suppressor",
+      "pathway": "TGF_beta",
+      "priority": 1
+    },
+    {
+      "gene_symbol": "CDKN2A",
+      "category": "tumor_suppressor",
+      "pathway": "cell_cycle",
+      "priority": 1
+    },
+
+    {
+      "gene_symbol": "ARID1A",
+      "category": "chromatin_remodeling",
+      "pathway": "epigenetic_regulation",
+      "priority": 2
+    },
+    {
+      "gene_symbol": "TGFBR2",
+      "category": "signaling",
+      "pathway": "TGF_beta",
+      "priority": 2
+    },
+    {
+      "gene_symbol": "RNF43",
+      "category": "tumor_suppressor",
+      "pathway": "WNT_signaling",
+      "priority": 2
+    },
+    {
+      "gene_symbol": "KDM6A",
+      "category": "epigenetic",
+      "pathway": "histone_modification",
+      "priority": 2
+    },
+    {
+      "gene_symbol": "PIK3CA",
+      "category": "oncogene",
+      "pathway": "PI3K_AKT",
+      "priority": 2
+    },
+    {
+      "gene_symbol": "PTEN",
+      "category": "tumor_suppressor",
+      "pathway": "PI3K_AKT",
+      "priority": 2
+    },
+
+    {
+      "gene_symbol": "BRCA1",
+      "category": "DNA_repair",
+      "pathway": "homologous_recombination",
+      "priority": 3
+    },
+    {
+      "gene_symbol": "BRCA2",
+      "category": "DNA_repair",
+      "pathway": "homologous_recombination",
+      "priority": 3
+    },
+    {
+      "gene_symbol": "ATM",
+      "category": "DNA_repair",
+      "pathway": "DNA_damage_response",
+      "priority": 3
+    },
+    {
+      "gene_symbol": "PALB2",
+      "category": "DNA_repair",
+      "pathway": "homologous_recombination",
+      "priority": 3
+    }
+  ]
+}

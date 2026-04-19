@@ -1,0 +1,21 @@
+Hugo_Symbol	Ensembl_ID	Chromosome	Tumor_TPM	Normal_TPM	Log2_FC	Regulation	Pathway	Clinical_Relevance
+KRAS	ENSG00000133703	12	94.2	89.7	0.07	Neutral	RAS/MAPK signaling	Wild-type; near-normal expression
+BRAF	ENSG00000157764	7	312.8	54.3	2.53	Upregulated	MAPK signaling	V600E driver mutation; overexpressed
+MAP2K1	ENSG00000169032	15	287.4	67.2	2.10	Upregulated	MAPK downstream	Activated by BRAF V600E
+ERK2	ENSG00000100030	22	341.2	89.4	1.93	Upregulated	MAPK downstream	Constitutive ERK activation
+GNAS	ENSG00000087460	20	298.4	87.3	1.77	Upregulated	cAMP/PKA signaling	R201H mutation; overexpressed
+CDKN2A	ENSG00000147889	9	4.2	142.8	-5.08	Downregulated	Cell cycle regulation	Splice-site mutation; silenced
+TP53	ENSG00000141510	17	389.4	98.4	1.99	Upregulated	DNA damage response	Mutant p53 accumulation (R175H)
+GATA6	ENSG00000141448	18	312.4	187.3	0.74	Upregulated	Classical subtype marker	High GATA6 = classical subtype
+KRT17	ENSG00000128422	17	42.3	34.2	0.31	Neutral	Basal-like subtype marker	Low = classical subtype confirmed
+SMAD4	ENSG00000141646	18	178.3	187.3	-0.07	Neutral	TGF-beta pathway	Wild-type; retained expression
+BRCA2	ENSG00000139618	13	189.4	201.3	-0.09	Neutral	DNA repair	Wild-type; retained
+CDH1	ENSG00000039068	16	187.4	201.4	-0.11	Neutral	Cell adhesion (EMT)	Retained E-cadherin; less EMT
+VIM	ENSG00000026025	10	98.3	67.8	0.54	Neutral	Cytoskeleton (EMT)	Limited mesenchymal transition
+VEGFA	ENSG00000112715	6	198.4	54.2	1.87	Upregulated	Angiogenesis	Elevated angiogenesis
+MYC	ENSG00000136997	8	187.4	41.3	2.18	Upregulated	Cell proliferation	Elevated proliferation
+PBRM1	ENSG00000163565	3	18.4	187.3	-3.35	Downregulated	Chromatin remodeling	Frameshift mutation; silenced
+IL6	ENSG00000136244	7	87.4	24.7	1.82	Upregulated	Inflammatory signaling	Moderate inflammation
+PDCD1	ENSG00000188389	2	42.3	18.7	1.18	Upregulated	Immune checkpoint (PD-1)	Slightly elevated — potential immunotherapy candidate
+CD274	ENSG00000120217	9	54.3	14.2	1.94	Upregulated	Immune checkpoint (PD-L1)	Higher than sample-001; possible IO response
+ERBB2	ENSG00000141736	17	87.4	54.3	0.69	Neutral	HER2 signaling	Not altered

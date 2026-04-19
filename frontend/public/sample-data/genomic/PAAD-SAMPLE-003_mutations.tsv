@@ -1,0 +1,5 @@
+Hugo_Symbol	Chromosome	Start_Position	End_Position	Variant_Classification	Variant_Type	Reference_Allele	Tumor_Seq_Allele	Tumor_Sample_Barcode	HGVSp_Short	Mutation_Status	VAF
+KRAS	12	25398284	25398284	Missense_Mutation	SNP	C	T	PAAD-SAMPLE-003	p.G12D	Somatic	0.52
+CDKN2A	9	21971186	21971186	Missense_Mutation	SNP	G	T	PAAD-SAMPLE-003	p.R58L	Somatic	0.41
+TGFBR2	3	30691871	30691871	Missense_Mutation	SNP	A	G	PAAD-SAMPLE-003	p.D494G	Somatic	0.28
+ARID1A	1	26780603	26780603	Nonsense_Mutation	SNP	C	T	PAAD-SAMPLE-003	p.Q1430*	Somatic	0.19

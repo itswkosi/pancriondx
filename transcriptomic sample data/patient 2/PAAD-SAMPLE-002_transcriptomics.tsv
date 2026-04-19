@@ -1,0 +1,21 @@
+Hugo_Symbol	Gene_Symbol	Ensembl_ID	Chromosome	Tumor_TPM	Normal_TPM	Log2_FC	Regulation	Variant	Pathogenicity	Pathway	Clinical_Relevance	Tumor_Sample_Barcode
+KRAS	KRAS	ENSG00000133703	12	94.2	89.7	0.07	Neutral	Wild-type	Benign	RAS/MAPK signaling	Wild-type; near-normal expression; BRAF drives downstream pathway instead	PAAD-SAMPLE-002
+BRAF	BRAF	ENSG00000157764	7	312.8	54.3	2.53	Upregulated	c.1799T>A (p.V600E)	Pathogenic	MAPK signaling	V600E constitutively activates MEK/ERK independent of KRAS	PAAD-SAMPLE-002
+MAP2K1	MAP2K1	ENSG00000169032	15	287.4	67.2	2.10	Upregulated	No coding variant	Likely Pathogenic	MAPK downstream	MEK1 activated downstream of BRAF V600E	PAAD-SAMPLE-002
+ERK2	MAPK1	ENSG00000100030	22	341.2	89.4	1.93	Upregulated	No coding variant	Likely Pathogenic	MAPK downstream	Constitutive ERK activation; proliferation signal	PAAD-SAMPLE-002
+GNAS	GNAS	ENSG00000087460	20	298.4	87.3	1.77	Upregulated	c.602G>A (p.R201H)	Pathogenic	cAMP/PKA signaling	R201H mutation causes Gs-alpha overactivation	PAAD-SAMPLE-002
+CDKN2A	CDKN2A	ENSG00000147889	9	4.2	142.8	-5.08	Downregulated	Splice-site c.228+1G>A	Pathogenic	Cell cycle regulation	Splice-site mutation causes exon skipping; p16 lost	PAAD-SAMPLE-002
+TP53	TP53	ENSG00000141510	17	389.4	98.4	1.99	Upregulated	c.524G>A (p.R175H)	Pathogenic	DNA damage response	Mutant p53 accumulation; dominant-negative effect	PAAD-SAMPLE-002
+GATA6	GATA6	ENSG00000141448	18	312.4	187.3	0.74	Upregulated	No coding variant	Likely Pathogenic	Classical subtype marker	High GATA6 confirms classical subtype classification	PAAD-SAMPLE-002
+KRT17	KRT17	ENSG00000128422	17	42.3	34.2	0.31	Neutral	No coding variant	Benign	Basal-like subtype marker	Low KRT17; classical subtype confirmed	PAAD-SAMPLE-002
+SMAD4	SMAD4	ENSG00000141646	18	178.3	187.3	-0.07	Neutral	Wild-type	Benign	TGF-beta pathway	Retained; consistent with wild-type genomic status	PAAD-SAMPLE-002
+PBRM1	PBRM1	ENSG00000163565	3	18.4	187.3	-3.35	Downregulated	c.2458_2459delAT (p.T820fs)	Pathogenic	Chromatin remodeling	Frameshift causes NMD; chromatin dysregulation	PAAD-SAMPLE-002
+CDH1	CDH1	ENSG00000039068	16	187.4	201.4	-0.11	Neutral	No coding variant	Benign	EMT / cell adhesion	Retained E-cadherin; limited EMT in classical subtype	PAAD-SAMPLE-002
+VIM	VIM	ENSG00000026025	10	98.3	67.8	0.54	Neutral	No coding variant	Benign	EMT / cytoskeleton	Low vimentin; minimal mesenchymal transition	PAAD-SAMPLE-002
+VEGFA	VEGFA	ENSG00000112715	6	198.4	54.2	1.87	Upregulated	No coding variant	Likely Pathogenic	Angiogenesis	Elevated angiogenesis signaling	PAAD-SAMPLE-002
+MYC	MYC	ENSG00000136997	8	187.4	41.3	2.18	Upregulated	No coding variant	Likely Pathogenic	Cell proliferation	Elevated without amplification; transcriptional upregulation	PAAD-SAMPLE-002
+IL6	IL6	ENSG00000136244	7	87.4	24.7	1.82	Upregulated	No coding variant	Likely Pathogenic	Inflammatory signaling	Moderate inflammatory signaling	PAAD-SAMPLE-002
+PDCD1	PDCD1	ENSG00000188389	2	42.3	18.7	1.18	Upregulated	No coding variant	Variant of Uncertain Significance	Immune checkpoint (PD-1)	Slightly elevated; possible immunotherapy candidate	PAAD-SAMPLE-002
+CD274	CD274	ENSG00000120217	9	54.3	14.2	1.94	Upregulated	No coding variant	Likely Pathogenic	Immune checkpoint (PD-L1)	Higher PD-L1 than sample-001; potential IO responder	PAAD-SAMPLE-002
+BRCA2	BRCA2	ENSG00000139618	13	189.4	201.3	-0.09	Neutral	Wild-type	Benign	DNA repair	Retained; wild-type	PAAD-SAMPLE-002
+ERBB2	ERBB2	ENSG00000141736	17	87.4	54.3	0.69	Neutral	No coding variant	Benign	HER2 signaling	Not altered	PAAD-SAMPLE-002

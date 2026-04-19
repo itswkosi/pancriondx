@@ -1,0 +1,2 @@
+patient_id	molecular_subtype	total_genes_analyzed	upregulated_count	downregulated_count	neutral_count	pathogenic_expression_events	likely_pathogenic_expression_events	vus_expression_events	benign_expression_events	tumor_purity	ras_pathway_score	tgfb_pathway_score	cell_cycle_score	emt_score	immune_score	transcriptomic_risk	notes
+PAAD-SAMPLE-001	Basal-like	20	12	5	3	4	9	1	4	0.74	8.7	2.1	1.8	7.4	2.3	High	Strong EMT; KRT17 high / GATA6 low confirms basal-like; SMAD4 and CDKN2A silenced consistent with genomic deletions

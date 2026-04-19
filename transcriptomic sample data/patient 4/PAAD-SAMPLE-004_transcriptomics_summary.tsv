@@ -1,0 +1,2 @@
+patient_id	molecular_subtype	total_genes_analyzed	upregulated_count	downregulated_count	neutral_count	pathogenic_expression_events	likely_pathogenic_expression_events	vus_expression_events	benign_expression_events	tumor_purity	ras_pathway_score	tgfb_pathway_score	cell_cycle_score	emt_score	immune_score	transcriptomic_risk	notes
+PAAD-SAMPLE-004	Basal-like	20	14	6	0	6	13	0	0	0.83	9.8	1.2	0.9	9.6	7.4	Very High	Worst-prognosis profile; complete EMT via SNAI1/ZEB1/CDH1 axis; BRCA2 silenced; full SMAD4/CDKN2A loss; maximal immune evasion

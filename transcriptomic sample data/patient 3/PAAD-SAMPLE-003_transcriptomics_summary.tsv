@@ -1,0 +1,2 @@
+patient_id	molecular_subtype	total_genes_analyzed	upregulated_count	downregulated_count	neutral_count	pathogenic_expression_events	likely_pathogenic_expression_events	vus_expression_events	benign_expression_events	tumor_purity	ras_pathway_score	tgfb_pathway_score	cell_cycle_score	emt_score	immune_score	transcriptomic_risk	notes
+PAAD-SAMPLE-003	Classical	20	2	3	15	1	3	1	15	0.51	3.4	2.8	3.1	1.2	1.8	Low-Moderate	Best-prognosis profile; retained epithelial markers; no EMT; low immune evasion; SMAD4/TP53 wild-type expression

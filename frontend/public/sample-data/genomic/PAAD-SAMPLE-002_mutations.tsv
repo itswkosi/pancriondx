@@ -1,0 +1,7 @@
+Hugo_Symbol	Chromosome	Start_Position	End_Position	Variant_Classification	Variant_Type	Reference_Allele	Tumor_Seq_Allele	Tumor_Sample_Barcode	HGVSp_Short	Mutation_Status	VAF
+BRAF	7	140453136	140453136	Missense_Mutation	SNP	A	T	PAAD-SAMPLE-002	p.V600E	Somatic	0.51
+TP53	17	7673802	7673802	Missense_Mutation	SNP	G	A	PAAD-SAMPLE-002	p.R175H	Somatic	0.46
+GNAS	20	57484421	57484421	Missense_Mutation	SNP	G	A	PAAD-SAMPLE-002	p.R201H	Somatic	0.38
+CDKN2A	9	21971186	21971186	Splice_Site	SNP	G	A	PAAD-SAMPLE-002	p.X76_splice	Somatic	0.29
+RNF43	17	56397431	56397431	Missense_Mutation	SNP	G	T	PAAD-SAMPLE-002	p.G659V	Somatic	0.22
+PBRM1	3	52579751	52579751	Frameshift_Del	DEL	AT	-	PAAD-SAMPLE-002	p.T820fs	Somatic	0.17

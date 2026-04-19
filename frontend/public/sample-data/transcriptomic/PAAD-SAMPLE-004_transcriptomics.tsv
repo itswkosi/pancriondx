@@ -1,0 +1,21 @@
+Hugo_Symbol	Ensembl_ID	Chromosome	Tumor_TPM	Normal_TPM	Log2_FC	Regulation	Pathway	Clinical_Relevance
+KRAS	ENSG00000133703	12	712.4	89.2	3.00	Upregulated	RAS/MAPK signaling	G12V; highest expression in cohort
+MYC	ENSG00000136997	8	589.3	41.3	3.84	Upregulated	Cell proliferation	High amplification drives strong overexpression
+EGFR	ENSG00000146648	7	312.4	67.1	2.22	Upregulated	RTK signaling	Elevated; potential therapeutic target
+SMAD4	ENSG00000141646	18	4.2	187.3	-5.48	Downregulated	TGF-beta pathway	Homozygous deletion; near-complete silencing
+CDKN2A	ENSG00000147889	9	1.8	142.8	-6.31	Downregulated	Cell cycle regulation	Homozygous deletion; complete loss
+TP53	ENSG00000141510	17	534.2	98.4	2.44	Upregulated	DNA damage response	Mutant p53 accumulation (R213*)
+BRCA2	ENSG00000139618	13	28.4	201.3	-2.82	Downregulated	DNA repair	Frameshift; markedly reduced
+VEGFA	ENSG00000112715	6	487.3	54.2	3.17	Upregulated	Angiogenesis	Strong angiogenesis; metastatic driver
+MMP9	ENSG00000100985	20	412.4	28.7	3.85	Upregulated	ECM remodeling	Aggressive invasion signature
+MMP2	ENSG00000087245	16	389.3	34.2	3.51	Upregulated	ECM remodeling	Matrix degradation; metastasis
+CDH1	ENSG00000039068	16	8.4	201.4	-4.58	Downregulated	Cell adhesion (EMT)	Complete E-cadherin loss; full EMT
+VIM	ENSG00000026025	10	587.4	67.8	3.11	Upregulated	Cytoskeleton (EMT)	Strong mesenchymal transition
+SNAI1	ENSG00000124216	20	312.4	28.3	3.46	Upregulated	EMT transcription factor	SNAIL drives CDH1 repression
+ZEB1	ENSG00000010310	10	287.3	31.2	3.20	Upregulated	EMT transcription factor	Co-drives mesenchymal transition
+GATA6	ENSG00000141448	18	14.2	187.3	-3.72	Downregulated	Classical subtype marker	Low = basal-like subtype
+KRT17	ENSG00000128422	17	512.4	34.2	3.91	Upregulated	Basal-like subtype marker	Highest in cohort; strongly basal-like
+SPARC	ENSG00000113140	5	487.3	78.4	2.64	Upregulated	Tumor microenvironment	Heavy desmoplastic stroma
+ACTA2	ENSG00000107796	10	534.2	89.3	2.58	Upregulated	Cancer-associated fibroblasts	Dense CAF infiltration
+IL6	ENSG00000136244	7	412.3	24.7	4.06	Upregulated	Inflammatory signaling	Highest IL-6 in cohort; systemic inflammation
+CD274	ENSG00000120217	9	198.4	14.2	3.80	Upregulated	Immune checkpoint (PD-L1)	Strong immune evasion

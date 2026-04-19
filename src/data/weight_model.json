@@ -1,0 +1,8 @@
+{
+  "weights": {
+    "pathogenic": 1.0,
+    "likely_pathogenic": 0.8,
+    "uncertain_significance": 0.2,
+    "benign": 0.0
+  }
+}

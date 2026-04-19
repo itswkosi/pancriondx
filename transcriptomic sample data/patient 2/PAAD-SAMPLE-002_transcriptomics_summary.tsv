@@ -1,0 +1,2 @@
+patient_id	molecular_subtype	total_genes_analyzed	upregulated_count	downregulated_count	neutral_count	pathogenic_expression_events	likely_pathogenic_expression_events	vus_expression_events	benign_expression_events	tumor_purity	ras_pathway_score	tgfb_pathway_score	cell_cycle_score	emt_score	immune_score	transcriptomic_risk	notes
+PAAD-SAMPLE-002	Classical	20	9	2	9	5	6	1	6	0.68	7.2	4.8	2.1	2.8	4.7	High	KRAS-wt; BRAF/ERK constitutively active; GATA6 high confirms classical; elevated PD-L1 suggests IO potential

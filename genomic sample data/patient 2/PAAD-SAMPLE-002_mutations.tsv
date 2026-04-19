@@ -1,0 +1,7 @@
+Hugo_Symbol	Gene_Symbol	Ensembl_ID	Chromosome	Start_Position	End_Position	Variant_Classification	Variant_Type	Reference_Allele	Tumor_Seq_Allele	Tumor_Sample_Barcode	HGVSp_Short	Variant	Pathogenicity	Mutation_Status	VAF
+BRAF	BRAF	ENSG00000157764	7	140453136	140453136	Missense_Mutation	SNP	A	T	PAAD-SAMPLE-002	p.V600E	c.1799T>A	Pathogenic	Somatic	0.51
+TP53	TP53	ENSG00000141510	17	7673802	7673802	Missense_Mutation	SNP	G	A	PAAD-SAMPLE-002	p.R175H	c.524G>A	Pathogenic	Somatic	0.46
+GNAS	GNAS	ENSG00000087460	20	57484421	57484421	Missense_Mutation	SNP	G	A	PAAD-SAMPLE-002	p.R201H	c.602G>A	Pathogenic	Somatic	0.38
+CDKN2A	CDKN2A	ENSG00000147889	9	21971186	21971186	Splice_Site	SNP	G	A	PAAD-SAMPLE-002	p.X76_splice	c.228+1G>A	Pathogenic	Somatic	0.29
+RNF43	RNF43	ENSG00000108375	17	56397431	56397431	Missense_Mutation	SNP	G	T	PAAD-SAMPLE-002	p.G659V	c.1976G>T	Likely Pathogenic	Somatic	0.22
+PBRM1	PBRM1	ENSG00000163565	3	52579751	52579752	Frameshift_Del	DEL	AT	-	PAAD-SAMPLE-002	p.T820fs	c.2458_2459delAT	Pathogenic	Somatic	0.17

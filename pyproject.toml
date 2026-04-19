@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "pancrion_dx"
+version = "0.1.0"
+description = "Genomics clinical decision support backend"
+authors = ["Developer <dev@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "*"
+uvicorn = "*"
+pydantic = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,21 @@
+Hugo_Symbol	Gene_Symbol	Ensembl_ID	Chromosome	Tumor_TPM	Normal_TPM	Log2_FC	Regulation	Variant	Pathogenicity	Pathway	Clinical_Relevance	Tumor_Sample_Barcode
+KRAS	KRAS	ENSG00000133703	12	487.3	89.2	2.45	Upregulated	c.35G>T (p.G12V)	Pathogenic	RAS/MAPK signaling	Driver oncogene; constitutive RAS activation	PAAD-SAMPLE-001
+TP53	TP53	ENSG00000141510	17	421.8	98.4	2.10	Upregulated	c.742C>T (p.R248W)	Pathogenic	DNA damage response	Mutant p53 protein accumulation; gain-of-function	PAAD-SAMPLE-001
+SMAD4	SMAD4	ENSG00000141646	18	12.4	187.3	-3.92	Downregulated	c.1081C>T (p.R361*)	Pathogenic	TGF-beta pathway	Nonsense mutation causes transcript degradation	PAAD-SAMPLE-001
+CDKN2A	CDKN2A	ENSG00000147889	9	3.1	142.8	-5.53	Downregulated	Homozygous deletion	Pathogenic	Cell cycle regulation	Complete transcriptional silencing; no p16 expression	PAAD-SAMPLE-001
+MYC	MYC	ENSG00000136997	8	312.7	41.3	2.92	Upregulated	High amplification (CN+2.14)	Likely Pathogenic	Cell proliferation	Co-amplified; drives uncontrolled proliferation	PAAD-SAMPLE-001
+EGFR	EGFR	ENSG00000146648	7	198.4	67.1	1.56	Upregulated	No coding variant	Variant of Uncertain Significance	RTK signaling	Overexpressed without mutation; therapeutic consideration	PAAD-SAMPLE-001
+VEGFA	VEGFA	ENSG00000112715	6	289.4	54.2	2.42	Upregulated	No coding variant	Likely Pathogenic	Angiogenesis	Elevated angiogenic signaling; poor prognosis marker	PAAD-SAMPLE-001
+MMP9	MMP9	ENSG00000100985	20	176.3	28.7	2.62	Upregulated	No coding variant	Likely Pathogenic	ECM remodeling	Matrix degradation driving invasion	PAAD-SAMPLE-001
+CDH1	CDH1	ENSG00000039068	16	18.7	201.4	-3.43	Downregulated	No coding variant	Pathogenic	EMT / cell adhesion	E-cadherin loss; epithelial-mesenchymal transition confirmed	PAAD-SAMPLE-001
+VIM	VIM	ENSG00000026025	10	334.2	67.8	2.30	Upregulated	No coding variant	Likely Pathogenic	EMT / cytoskeleton	Vimentin gain; mesenchymal transition marker	PAAD-SAMPLE-001
+KRT17	KRT17	ENSG00000128422	17	412.8	34.2	3.59	Upregulated	No coding variant	Likely Pathogenic	Basal-like subtype marker	High KRT17 confirms basal-like subtype classification	PAAD-SAMPLE-001
+GATA6	GATA6	ENSG00000141448	18	28.4	187.3	-2.72	Downregulated	No coding variant	Likely Pathogenic	Classical subtype marker	Low GATA6 consistent with basal-like; poor prognosis	PAAD-SAMPLE-001
+SPARC	SPARC	ENSG00000113140	5	289.3	78.4	1.88	Upregulated	No coding variant	Likely Pathogenic	Tumor microenvironment	Stromal desmoplasia; drug delivery barrier	PAAD-SAMPLE-001
+ACTA2	ACTA2	ENSG00000107796	10	412.7	89.3	2.21	Upregulated	No coding variant	Likely Pathogenic	Cancer-associated fibroblasts	Dense CAF infiltration; desmoplastic stroma	PAAD-SAMPLE-001
+IL6	IL6	ENSG00000136244	7	198.3	24.7	3.00	Upregulated	No coding variant	Likely Pathogenic	Inflammatory signaling	Elevated systemic inflammation; poor prognosis cytokine	PAAD-SAMPLE-001
+CD274	CD274	ENSG00000120217	9	28.3	14.2	0.99	Upregulated	No coding variant	Likely Pathogenic	Immune checkpoint (PD-L1)	Immune evasion; moderate PD-L1 expression	PAAD-SAMPLE-001
+BRCA2	BRCA2	ENSG00000139618	13	187.4	201.3	-0.10	Neutral	No coding variant	Benign	DNA repair	Wild-type; retained expression	PAAD-SAMPLE-001
+EPCAM	EPCAM	ENSG00000119888	2	421.3	312.4	0.43	Neutral	No coding variant	Benign	Epithelial marker	Partially retained; mixed epithelial/mesenchymal state	PAAD-SAMPLE-001
+PDCD1	PDCD1	ENSG00000188389	2	12.4	18.7	-0.59	Neutral	No coding variant	Benign	Immune checkpoint (PD-1)	Low; limited T-cell infiltration	PAAD-SAMPLE-001
+ERBB2	ERBB2	ENSG00000141736	17	87.4	54.3	0.69	Neutral	No coding variant	Benign	HER2 signaling	Not amplified or overexpressed	PAAD-SAMPLE-001

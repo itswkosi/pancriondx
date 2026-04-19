@@ -1,0 +1,21 @@
+Hugo_Symbol	Ensembl_ID	Chromosome	Tumor_TPM	Normal_TPM	Log2_FC	Regulation	Pathway	Clinical_Relevance
+KRAS	ENSG00000133703	12	487.3	89.2	2.45	Upregulated	RAS/MAPK signaling	Driver oncogene; G12V mutation
+MYC	ENSG00000136997	8	312.7	41.3	2.92	Upregulated	Cell proliferation	Co-amplified with KRAS
+EGFR	ENSG00000146648	7	198.4	67.1	1.56	Upregulated	RTK signaling	Therapeutic target
+SMAD4	ENSG00000141646	18	12.4	187.3	-3.92	Downregulated	TGF-beta pathway	Consistent with SMAD4 nonsense mutation
+CDKN2A	ENSG00000147889	9	3.1	142.8	-5.53	Downregulated	Cell cycle regulation	Homozygous deletion confirmed
+TP53	ENSG00000141510	17	421.8	98.4	2.10	Upregulated	DNA damage response	Mutant p53 protein accumulation
+VEGFA	ENSG00000112715	6	289.4	54.2	2.42	Upregulated	Angiogenesis	Poor prognosis marker
+MMP9	ENSG00000100985	20	176.3	28.7	2.62	Upregulated	ECM remodeling	Invasion/metastasis
+CDH1	ENSG00000039068	16	18.7	201.4	-3.43	Downregulated	Cell adhesion (EMT)	EMT marker — loss of E-cadherin
+VIM	ENSG00000026025	10	334.2	67.8	2.30	Upregulated	Cytoskeleton (EMT)	Mesenchymal transition marker
+EPCAM	ENSG00000119888	2	421.3	312.4	0.43	Neutral	Epithelial marker	Relatively retained
+BRCA2	ENSG00000139618	13	187.4	201.3	-0.10	Neutral	DNA repair	Wild-type expression retained
+GATA6	ENSG00000141448	18	28.4	187.3	-2.72	Downregulated	Classical subtype marker	Low = basal-like subtype
+KRT17	ENSG00000128422	17	412.8	34.2	3.59	Upregulated	Basal-like subtype marker	High = basal-like subtype
+SPARC	ENSG00000113140	5	289.3	78.4	1.88	Upregulated	Tumor microenvironment	Stromal desmoplasia marker
+ACTA2	ENSG00000107796	10	412.7	89.3	2.21	Upregulated	Cancer-associated fibroblasts	Desmoplastic stroma
+IL6	ENSG00000136244	7	198.3	24.7	3.00	Upregulated	Inflammatory signaling	Poor prognosis cytokine
+PDCD1	ENSG00000188389	2	12.4	18.7	-0.59	Neutral	Immune checkpoint (PD-1)	Low immune infiltration
+CD274	ENSG00000120217	9	28.3	14.2	0.99	Upregulated	Immune checkpoint (PD-L1)	Immune evasion
+ERBB2	ENSG00000141736	17	87.4	54.3	0.69	Neutral	HER2 signaling	Not amplified in this case

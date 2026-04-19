@@ -1,0 +1,2 @@
+patient_id	molecular_subtype	total_genes_analyzed	upregulated_count	downregulated_count	neutral_count	tumor_purity	ras_pathway_score	tgfb_pathway_score	cell_cycle_score	emt_score	immune_score	mtor_score	transcriptomic_risk	notes
+PAAD-SAMPLE-002	Classical	20	9	2	9	0.68	7.2	4.8	2.1	2.8	4.7	4.3	High	KRAS-wt; BRAF/ERK constitutively active; classical subtype by GATA6/KRT17; potential PD-L1 responder

@@ -1,0 +1,2 @@
+patient_id	age_at_diagnosis	gender	race	ethnicity	vital_status	days_to_death	days_to_last_follow_up	ajcc_pathologic_stage	ajcc_pathologic_t	ajcc_pathologic_n	ajcc_pathologic_m	tumor_grade	primary_diagnosis	morphology	site_of_resection	residual_disease	alcohol_history	smoking_history	family_history_cancer	prior_malignancy	treatment_type	ca19_9_preop	bmi
+PAAD-SAMPLE-002	71	Female	White	Not Hispanic	Dead	287	287	Stage III	T4	N1	M0	G3	Pancreatic ductal adenocarcinoma	8500/3	Pancreatic body	R1	No	Never	Yes (mother, breast)	No	Surgery + FOLFIRINOX	1204.7	22.1

@@ -1,0 +1,21 @@
+Hugo_Symbol	Gene_Symbol	Ensembl_ID	Chromosome	Tumor_TPM	Normal_TPM	Log2_FC	Regulation	Variant	Pathogenicity	Pathway	Clinical_Relevance	Tumor_Sample_Barcode
+KRAS	KRAS	ENSG00000133703	12	198.4	89.2	1.15	Upregulated	c.35G>A (p.G12D)	Pathogenic	RAS/MAPK signaling	G12D moderately elevates KRAS expression; early-stage consistent	PAAD-SAMPLE-003
+CDKN2A	CDKN2A	ENSG00000147889	9	54.3	142.8	-1.40	Downregulated	Heterozygous loss	Likely Pathogenic	Cell cycle regulation	Partial reduction from het loss; one allele retained	PAAD-SAMPLE-003
+TGFBR2	TGFBR2	ENSG00000163513	3	34.2	187.3	-2.45	Downregulated	c.1481A>G (p.D494G)	Likely Pathogenic	TGF-beta receptor	Missense reduces receptor function; partial TGF-beta escape	PAAD-SAMPLE-003
+ARID1A	ARID1A	ENSG00000117713	1	61.3	187.4	-1.61	Downregulated	c.4288C>T (p.Q1430*)	Likely Pathogenic	Chromatin remodeling	Nonsense triggers NMD; reduced SWI/SNF complex activity	PAAD-SAMPLE-003
+MYC	MYC	ENSG00000136997	8	112.3	41.3	1.44	Upregulated	No coding variant	Variant of Uncertain Significance	Cell proliferation	Mild elevation; early-stage consistent; not amplified	PAAD-SAMPLE-003
+SMAD4	SMAD4	ENSG00000141646	18	167.3	187.3	-0.16	Neutral	Wild-type	Benign	TGF-beta pathway	Retained; wild-type genomic status confirmed	PAAD-SAMPLE-003
+TP53	TP53	ENSG00000141510	17	102.3	98.4	0.06	Neutral	Wild-type	Benign	DNA damage response	Wild-type; normal p53 function intact	PAAD-SAMPLE-003
+CDH1	CDH1	ENSG00000039068	16	178.4	201.4	-0.18	Neutral	No coding variant	Benign	EMT / cell adhesion	Retained E-cadherin; no EMT — favorable sign	PAAD-SAMPLE-003
+VIM	VIM	ENSG00000026025	10	78.3	67.8	0.21	Neutral	No coding variant	Benign	EMT / cytoskeleton	No mesenchymal transition; epithelial phenotype preserved	PAAD-SAMPLE-003
+EPCAM	EPCAM	ENSG00000119888	2	398.4	312.4	0.35	Neutral	No coding variant	Benign	Epithelial marker	Strongly retained; confirms epithelial phenotype	PAAD-SAMPLE-003
+GATA6	GATA6	ENSG00000141448	18	287.3	187.3	0.62	Upregulated	No coding variant	Benign	Classical subtype marker	High GATA6 = classical subtype; better prognosis	PAAD-SAMPLE-003
+KRT17	KRT17	ENSG00000128422	17	38.4	34.2	0.16	Neutral	No coding variant	Benign	Basal-like subtype marker	Low; classical subtype confirmed	PAAD-SAMPLE-003
+VEGFA	VEGFA	ENSG00000112715	6	98.4	54.2	0.86	Neutral	No coding variant	Benign	Angiogenesis	Mild; early-stage consistent	PAAD-SAMPLE-003
+MMP9	MMP9	ENSG00000100985	20	54.3	28.7	0.92	Neutral	No coding variant	Benign	ECM remodeling	Limited invasion signals; favorable	PAAD-SAMPLE-003
+SPARC	SPARC	ENSG00000113140	5	112.3	78.4	0.52	Neutral	No coding variant	Benign	Tumor microenvironment	Mild stromal involvement	PAAD-SAMPLE-003
+ACTA2	ACTA2	ENSG00000107796	10	134.2	89.3	0.59	Neutral	No coding variant	Benign	Cancer-associated fibroblasts	Mild desmoplasia; manageable stroma	PAAD-SAMPLE-003
+IL6	IL6	ENSG00000136244	7	42.3	24.7	0.78	Neutral	No coding variant	Benign	Inflammatory signaling	Low inflammation; favorable prognosis signal	PAAD-SAMPLE-003
+PDCD1	PDCD1	ENSG00000188389	2	14.2	18.7	-0.40	Neutral	No coding variant	Benign	Immune checkpoint (PD-1)	Low; limited immune evasion	PAAD-SAMPLE-003
+CD274	CD274	ENSG00000120217	9	18.4	14.2	0.37	Neutral	No coding variant	Benign	Immune checkpoint (PD-L1)	Low PD-L1; minimal immune evasion	PAAD-SAMPLE-003
+BRCA2	BRCA2	ENSG00000139618	13	198.3	201.3	-0.02	Neutral	Wild-type	Benign	DNA repair	Fully retained; intact DNA repair	PAAD-SAMPLE-003

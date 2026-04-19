@@ -1,0 +1,21 @@
+Hugo_Symbol	Gene_Symbol	Ensembl_ID	Chromosome	Tumor_TPM	Normal_TPM	Log2_FC	Regulation	Variant	Pathogenicity	Pathway	Clinical_Relevance	Tumor_Sample_Barcode
+KRAS	KRAS	ENSG00000133703	12	712.4	89.2	3.00	Upregulated	c.35G>T (p.G12V)	Pathogenic	RAS/MAPK signaling	Highest KRAS expression in cohort; maximal RAS activation	PAAD-SAMPLE-004
+TP53	TP53	ENSG00000141510	17	534.2	98.4	2.44	Upregulated	c.637C>T (p.R213*)	Pathogenic	DNA damage response	Nonsense leads to truncated dominant-negative p53 accumulation	PAAD-SAMPLE-004
+SMAD4	SMAD4	ENSG00000141646	18	4.2	187.3	-5.48	Downregulated	c.1081_1084delACGT (p.R361fs)	Pathogenic	TGF-beta pathway	Homozygous deletion; near-complete transcriptional silencing	PAAD-SAMPLE-004
+CDKN2A	CDKN2A	ENSG00000147889	9	1.8	142.8	-6.31	Downregulated	Homozygous deletion	Pathogenic	Cell cycle regulation	Complete loss; lowest expression in cohort; unchecked proliferation	PAAD-SAMPLE-004
+BRCA2	BRCA2	ENSG00000139618	13	28.4	201.3	-2.82	Downregulated	c.9976_9979delTTAG (p.K3326fs)	Pathogenic	DNA repair	Frameshift causes NMD; homologous recombination deficiency	PAAD-SAMPLE-004
+MYC	MYC	ENSG00000136997	8	589.3	41.3	3.84	Upregulated	High amplification (CN+2.14)	Pathogenic	Cell proliferation	Highest MYC in cohort; drives transcriptional reprogramming	PAAD-SAMPLE-004
+EGFR	EGFR	ENSG00000146648	7	312.4	67.1	2.22	Upregulated	No coding variant	Likely Pathogenic	RTK signaling	Overexpressed; potential therapeutic target	PAAD-SAMPLE-004
+VEGFA	VEGFA	ENSG00000112715	6	487.3	54.2	3.17	Upregulated	No coding variant	Likely Pathogenic	Angiogenesis	Strong angiogenesis; metastatic dissemination driver	PAAD-SAMPLE-004
+MMP9	MMP9	ENSG00000100985	20	412.4	28.7	3.85	Upregulated	No coding variant	Likely Pathogenic	ECM remodeling	Aggressive matrix degradation; highest in cohort	PAAD-SAMPLE-004
+MMP2	MMP2	ENSG00000087245	16	389.3	34.2	3.51	Upregulated	No coding variant	Likely Pathogenic	ECM remodeling	Co-elevated with MMP9; dual metalloprotease invasion signature	PAAD-SAMPLE-004
+CDH1	CDH1	ENSG00000039068	16	8.4	201.4	-4.58	Downregulated	No coding variant	Pathogenic	EMT / cell adhesion	Complete E-cadherin loss; full EMT transition	PAAD-SAMPLE-004
+VIM	VIM	ENSG00000026025	10	587.4	67.8	3.11	Upregulated	No coding variant	Likely Pathogenic	EMT / cytoskeleton	Highest vimentin in cohort; complete mesenchymal shift	PAAD-SAMPLE-004
+SNAI1	SNAI1	ENSG00000124216	20	312.4	28.3	3.46	Upregulated	No coding variant	Likely Pathogenic	EMT transcription factor	SNAIL directly represses CDH1; drives E-cadherin loss	PAAD-SAMPLE-004
+ZEB1	ZEB1	ENSG00000010310	10	287.3	31.2	3.20	Upregulated	No coding variant	Likely Pathogenic	EMT transcription factor	Co-drives mesenchymal transition with SNAI1	PAAD-SAMPLE-004
+GATA6	GATA6	ENSG00000141448	18	14.2	187.3	-3.72	Downregulated	No coding variant	Likely Pathogenic	Classical subtype marker	Low GATA6 = basal-like; worst prognosis subtype	PAAD-SAMPLE-004
+KRT17	KRT17	ENSG00000128422	17	512.4	34.2	3.91	Upregulated	No coding variant	Likely Pathogenic	Basal-like subtype marker	Highest KRT17 in cohort; strongly basal-like confirmed	PAAD-SAMPLE-004
+SPARC	SPARC	ENSG00000113140	5	487.3	78.4	2.64	Upregulated	No coding variant	Likely Pathogenic	Tumor microenvironment	Heavy desmoplastic stroma; drug delivery severely impaired	PAAD-SAMPLE-004
+ACTA2	ACTA2	ENSG00000107796	10	534.2	89.3	2.58	Upregulated	No coding variant	Likely Pathogenic	Cancer-associated fibroblasts	Dense CAF infiltration	PAAD-SAMPLE-004
+IL6	IL6	ENSG00000136244	7	412.3	24.7	4.06	Upregulated	No coding variant	Likely Pathogenic	Inflammatory signaling	Highest IL-6 in cohort; systemic inflammation; cachexia risk	PAAD-SAMPLE-004
+CD274	CD274	ENSG00000120217	9	198.4	14.2	3.80	Upregulated	No coding variant	Likely Pathogenic	Immune checkpoint (PD-L1)	Strong PD-L1-mediated immune evasion	PAAD-SAMPLE-004

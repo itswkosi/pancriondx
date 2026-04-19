@@ -1,0 +1,2 @@
+patient_id	age_at_diagnosis	gender	race	ethnicity	vital_status	days_to_death	days_to_last_follow_up	ajcc_pathologic_stage	ajcc_pathologic_t	ajcc_pathologic_n	ajcc_pathologic_m	tumor_grade	primary_diagnosis	morphology	site_of_resection	residual_disease	alcohol_history	smoking_history	family_history_cancer	prior_malignancy	treatment_type	ca19_9_preop	bmi
+PAAD-SAMPLE-003	58	Female	Asian	Not Hispanic	Alive	NA	891	Stage IB	T2	N0	M0	G1	Pancreatic ductal adenocarcinoma	8500/3	Pancreatic head	R0	No	Never	No	No	Surgery only	112.4	24.8
