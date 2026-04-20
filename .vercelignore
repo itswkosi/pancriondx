@@ -1,0 +1,11 @@
+ct-sample data/
+genomic sample data/
+transcriptomic sample data/
+venv/
+__pycache__/
+*.pyc
+*.pkl
+radiomic model/
+transcriptome model/
+tests/
+src/
