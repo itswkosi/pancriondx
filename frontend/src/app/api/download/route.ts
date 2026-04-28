@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server"
-import { readFile } from "fs/promises"
 import path from "path"
 
 // Maps category -> allowed filenames (filename only, no subdirectory)
@@ -81,18 +80,26 @@ export async function GET(req: NextRequest) {
     return new NextResponse("File not found", { status: 404 })
   }
 
-  // Resolve absolute path inside public/sample-data
-  const publicDir = path.join(process.cwd(), "public", "sample-data")
-  const filePath  = path.join(publicDir, category, file)
-
   // Guard against path traversal
-  if (!filePath.startsWith(publicDir)) {
+  const normalised = path.normalize(file)
+  if (normalised.includes("..")) {
     return new NextResponse("Forbidden", { status: 403 })
   }
 
+  // On Vercel, public/ files are served as static assets — fetch them via the
+  // internal origin so we can re-serve with a proper Content-Disposition header.
+  const origin = req.headers.get("x-forwarded-proto") && req.headers.get("x-forwarded-host")
+    ? `${req.headers.get("x-forwarded-proto")}://${req.headers.get("x-forwarded-host")}`
+    : new URL(req.url).origin
+
+  const staticUrl = `${origin}/sample-data/${category}/${file}`
+
   try {
-    const buf      = await readFile(filePath)
-    const filename = path.basename(file)   // strip any subfolder from Content-Disposition
+    const upstream = await fetch(staticUrl)
+    if (!upstream.ok) return new NextResponse("File not found", { status: 404 })
+
+    const filename = path.basename(file)
+    const buf      = await upstream.arrayBuffer()
     return new NextResponse(buf, {
       status: 200,
       headers: {
