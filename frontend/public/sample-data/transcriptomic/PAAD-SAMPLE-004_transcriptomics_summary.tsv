@@ -1,2 +1,0 @@
-patient_id	molecular_subtype	total_genes_analyzed	upregulated_count	downregulated_count	neutral_count	tumor_purity	ras_pathway_score	tgfb_pathway_score	cell_cycle_score	emt_score	immune_score	mtor_score	transcriptomic_risk	notes
-PAAD-SAMPLE-004	Basal-like	20	14	6	0	0.83	9.8	1.2	0.9	9.6	7.4	7.1	Very High	Highest-risk profile; complete EMT; BRCA2 silenced; full SMAD4/CDKN2A loss; strong immune evasion; metastatic consistent
