@@ -245,8 +245,8 @@ function HeroSection() {
           </p>
           <div className="flex flex-wrap gap-3">
             <a
-              href="/api/download?type=full"
-              download
+              href="/sample-data/genomic/PAAD-SAMPLE-001_mutations.tsv"
+              download="PAAD-SAMPLE-001_mutations.tsv"
               className="inline-flex items-center gap-2 font-sans text-[0.875rem] tracking-[0.02em]
                          px-7 py-[13px] rounded-xl bg-[#8B7CBF] text-white border border-[#8B7CBF]
                          transition-all duration-200
@@ -254,7 +254,7 @@ function HeroSection() {
                          hover:shadow-[0_6px_20px_rgba(139,124,191,0.22)]"
             >
               <DownloadIcon size={15} />
-              Download Full Sample Dataset
+              Download Sample Dataset
             </a>
             <a
               href="/#analysis"
@@ -591,30 +591,26 @@ function HowToUseSection() {
 
 const DOWNLOAD_FILES = [
   {
-    label: "Download Full Dataset",
-    ext: ".zip — genomic + transcriptomic + radiomic",
-    href: "/api/download?type=full",
-    icon: <ZipIcon />,
+    label: "Download Genomic Data",
+    ext: ".tsv — mutations · PAAD-SAMPLE-001",
+    href: "/sample-data/genomic/PAAD-SAMPLE-001_mutations.tsv",
+    download: "PAAD-SAMPLE-001_mutations.tsv",
+    icon: <DownloadIcon />,
     primary: true,
   },
   {
-    label: "Download Genomic Data",
-    ext: ".tsv — 4 patients · mutations, CNV, clinical",
-    href: "/api/download?type=genomic",
-    icon: <DownloadIcon />,
-    primary: false,
-  },
-  {
     label: "Download Transcriptomic Data",
-    ext: ".tsv — 4 patients · expression + pathway scores",
-    href: "/api/download?type=transcriptomic",
+    ext: ".tsv — expression · PAAD-SAMPLE-001",
+    href: "/sample-data/transcriptomic/PAAD-SAMPLE-001_transcriptomics.tsv",
+    download: "PAAD-SAMPLE-001_transcriptomics.tsv",
     icon: <DownloadIcon />,
     primary: false,
   },
   {
     label: "Download Radiomic Sample",
-    ext: ".dcm — CT scan DICOM slice (C3L-02118)",
-    href: "/api/download?type=radiomic&file=C3L-02118/1-001.dcm",
+    ext: ".dcm — CT scan DICOM slice · C3L-02118",
+    href: "/sample-data/radiomic/C3L-02118/1-001.dcm",
+    download: "1-001.dcm",
     icon: <DownloadIcon />,
     primary: false,
   },
@@ -624,12 +620,14 @@ const EXTRA_SAMPLES = [
   {
     label: "Early-stage sample (PAAD-003)",
     desc: "Stage IB · Classical subtype · Low-Moderate risk · best prognosis of cohort",
-    href: "/api/download?type=file&category=genomic&file=PAAD-SAMPLE-003_mutations.tsv",
+    href: "/sample-data/genomic/PAAD-SAMPLE-003_mutations.tsv",
+    download: "PAAD-SAMPLE-003_mutations.tsv",
   },
   {
     label: "Late-stage sample (PAAD-004)",
     desc: "Stage IV · Basal-like · Very High risk · full EMT + immune evasion signature",
-    href: "/api/download?type=file&category=genomic&file=PAAD-SAMPLE-004_mutations.tsv",
+    href: "/sample-data/genomic/PAAD-SAMPLE-004_mutations.tsv",
+    download: "PAAD-SAMPLE-004_mutations.tsv",
   },
 ]
 
@@ -693,11 +691,11 @@ function DownloadSection() {
 
         {/* RIGHT — download buttons */}
         <div className="flex flex-col gap-4">
-          {DOWNLOAD_FILES.map(({ label, ext, primary, icon, href }) => (
+          {DOWNLOAD_FILES.map(({ label, ext, primary, icon, href, download }) => (
             <a
               key={label}
               href={href}
-              download
+              download={download}
               className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl border transition-all duration-200 text-left no-underline
                 ${primary
                   ? "bg-[#8B7CBF] border-[#8B7CBF] text-white hover:bg-[#7A6BAE] hover:border-[#7A6BAE] hover:-translate-y-px hover:shadow-[0_6px_20px_rgba(139,124,191,0.22)]"
@@ -716,11 +714,11 @@ function DownloadSection() {
           {/* Extras */}
           <div className="mt-2 border-t border-[#E5E0EB] pt-5 space-y-3">
             <p className="text-[0.72rem] tracking-[0.12em] uppercase text-[#AAAAAA] font-medium mb-4">Individual samples</p>
-            {EXTRA_SAMPLES.map(({ label, desc, href }) => (
+            {EXTRA_SAMPLES.map(({ label, desc, href, download }) => (
               <a
                 key={label}
                 href={href}
-                download
+                download={download}
                 className="w-full flex items-start gap-3 px-5 py-4 rounded-xl border border-[#E5E0EB]
                            bg-white text-left no-underline transition-all duration-200
                            hover:border-[#C8B6E2] hover:-translate-y-px hover:shadow-sm"
@@ -777,8 +775,8 @@ function WhySection() {
 
         <div className="mt-12 flex flex-wrap gap-3 justify-center">
           <a
-            href="/api/download?type=full"
-            download
+            href="/sample-data/genomic/PAAD-SAMPLE-001_mutations.tsv"
+            download="PAAD-SAMPLE-001_mutations.tsv"
             className="inline-flex items-center gap-2 font-sans text-[0.875rem] tracking-[0.02em]
                        px-7 py-[13px] rounded-xl bg-[#8B7CBF] text-white border border-[#8B7CBF]
                        transition-all duration-200
