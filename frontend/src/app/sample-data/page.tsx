@@ -612,9 +612,9 @@ const DOWNLOAD_FILES = [
     primary: false,
   },
   {
-    label: "Download Radiomic Summary",
-    ext: ".csv — CT scan selection & quality metrics",
-    href: "/api/download?type=radiomic",
+    label: "Download Radiomic Sample",
+    ext: ".dcm — CT scan DICOM slice (C3L-02118)",
+    href: "/api/download?type=radiomic&file=C3L-02118/1-001.dcm",
     icon: <DownloadIcon />,
     primary: false,
   },
