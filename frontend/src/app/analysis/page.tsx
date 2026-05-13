@@ -104,13 +104,38 @@ function parseTranscriptomicFile(text: string, ext: string): TranscriptomicRow[]
   const rows = parseTabularFile(text, delim)
   if (rows.length === 0) throw new Error("File is empty.")
   const headers = rows[0].map(h => h.toLowerCase())
-  const gIdx = headers.findIndex(h => h.includes("gene"))
-  const eIdx = headers.findIndex(h => h.includes("expression") || h.includes("zscore") || h.includes("z_score") || h.includes("z-score") || h.includes("value"))
+  // Find gene column: prefer 'gene_symbol' over 'hugo_symbol' etc.
+  const gIdx = headers.findIndex(h => h === "gene_symbol" || h === "gene")
+    ?? headers.findIndex(h => h.includes("gene"))
+  // Find expression column: handles z-score, log2FC, TPM variants
+  // Priority order: explicit z-score fields first, then log2 fold-change, then TPM/value
+  const EXPRESSION_KEYWORDS = [
+    "zscore", "z_score", "z-score", "z score",
+    "log2_fc", "log2fc", "log2_fold", "log2fold", "lfc",
+    "log2",
+    "fold_change", "foldchange",
+    "expression",
+    "tumor_tpm", "tumour_tpm",
+    "value",
+  ]
+  let eIdx = -1
+  for (const kw of EXPRESSION_KEYWORDS) {
+    const i = headers.findIndex(h => h.includes(kw))
+    if (i !== -1 && i !== gIdx) { eIdx = i; break }
+  }
   if (gIdx === -1) throw new Error("Could not find a gene column. Expected a column containing 'gene'.")
-  return rows.slice(1).map(r => ({
-    gene: r[gIdx] ?? "",
-    expression: eIdx !== -1 ? (r[eIdx] ?? "") : (r[1] ?? ""),
+  if (eIdx === -1) {
+    console.warn("[Transcriptomic] No expression column detected. Headers:", headers)
+    console.warn("[Transcriptomic] Looked for:", EXPRESSION_KEYWORDS.join(", "))
+  }
+  const parsed = rows.slice(1).map(r => ({
+    gene: (r[gIdx] ?? "").trim(),
+    expression: eIdx !== -1 ? (r[eIdx] ?? "0") : "0",
   })).filter(r => r.gene)
+  console.log(`[Transcriptomic] Parsed ${parsed.length} gene rows from file`)
+  console.log(`[Transcriptomic] Gene column idx=${gIdx} (${headers[gIdx]}), Expression column idx=${eIdx} (${eIdx !== -1 ? headers[eIdx] : "NOT FOUND — defaulting to 0"})`)
+  console.log(`[Transcriptomic] First 5 rows:`, parsed.slice(0, 5))
+  return parsed
 }
 
 function parseRadiomicCSV(text: string, delim: string): RadiomicFeatures {
@@ -124,30 +149,44 @@ function parseRadiomicCSV(text: string, delim: string): RadiomicFeatures {
     }
     return 0
   }
-  return {
-    tumor_size: pick(["tumor_size", "size", "diameter"]) || 3.5 + Math.random(),
-    heterogeneity: pick(["heterogeneity", "texture"]) || 0.6 + Math.random() * 0.1,
-    necrosis: pick(["necrosis", "necrotic"]) || 0.4 + Math.random() * 0.2,
-    edge_sharpness: pick(["edge_sharpness", "sharpness", "edge"]) || 0.5 + Math.random() * 0.2,
+  const features = {
+    tumor_size: pick(["tumor_size", "size", "diameter"]),
+    heterogeneity: pick(["heterogeneity", "texture"]),
+    necrosis: pick(["necrosis", "necrotic"]),
+    edge_sharpness: pick(["edge_sharpness", "sharpness", "edge"]),
   }
+  const missing = Object.entries(features).filter(([, v]) => v === 0).map(([k]) => k)
+  if (missing.length > 0) {
+    console.warn("[Radiomic] Columns not found in file, defaulting to 0:", missing)
+  }
+  return features
 }
 
 function parseRadiomicJSON(text: string): RadiomicFeatures {
   const obj = JSON.parse(text)
-  return {
-    tumor_size: parseFloat(obj.tumor_size ?? obj.tumorSize ?? obj.size) || 3.5 + Math.random(),
-    heterogeneity: parseFloat(obj.heterogeneity) || 0.6 + Math.random() * 0.1,
-    necrosis: parseFloat(obj.necrosis) || 0.4 + Math.random() * 0.2,
-    edge_sharpness: parseFloat(obj.edge_sharpness ?? obj.edgeSharpness ?? obj.sharpness) || 0.5 + Math.random() * 0.2,
+  const features: RadiomicFeatures = {
+    tumor_size: parseFloat(obj.tumor_size ?? obj.tumorSize ?? obj.size) || 0,
+    heterogeneity: parseFloat(obj.heterogeneity) || 0,
+    necrosis: parseFloat(obj.necrosis) || 0,
+    edge_sharpness: parseFloat(obj.edge_sharpness ?? obj.edgeSharpness ?? obj.sharpness) || 0,
   }
+  const missing = Object.entries(features).filter(([, v]) => v === 0).map(([k]) => k)
+  if (missing.length > 0) {
+    console.warn("[Radiomic] Fields not found in JSON, defaulting to 0:", missing)
+  }
+  return features
 }
 
 function generateRadiomicFeatures(): RadiomicFeatures {
+  // Returns deterministic neutral defaults when DICOM metadata is extracted
+  // but pixel-level radiomic features cannot be computed from the DICOM file.
+  // Users should adjust sliders manually for accurate analysis.
+  console.warn("[Radiomic] DICOM pixel analysis not available — returning neutral defaults. Adjust sliders manually.")
   return {
-    tumor_size: parseFloat((3.5 + Math.random()).toFixed(2)),
-    heterogeneity: parseFloat((0.6 + Math.random() * 0.1).toFixed(2)),
-    necrosis: parseFloat((0.4 + Math.random() * 0.2).toFixed(2)),
-    edge_sharpness: parseFloat((0.5 + Math.random() * 0.2).toFixed(2)),
+    tumor_size: 0,
+    heterogeneity: 0,
+    necrosis: 0,
+    edge_sharpness: 0,
   }
 }
 
@@ -588,13 +627,27 @@ export default function AnalysisPage() {
     // Small artificial delay so the spinner is visible
     await new Promise(r => setTimeout(r, 600))
 
-    const txGenes = (transcriptomic.data ?? []).map(row => {
-      const z = parseFloat(row.expression) || 0
+    const txRaw = transcriptomic.data ?? []
+    console.log("[Pipeline] Transcriptomic upload: rows =", txRaw.length)
+    if (txRaw.length > 0) {
+      const sample = txRaw.slice(0, 5)
+      console.log("[Pipeline] Transcriptomic sample rows:", sample)
+      const zeroCount = txRaw.filter(r => (parseFloat(r.expression) || 0) === 0).length
+      const nanCount = txRaw.filter(r => isNaN(parseFloat(r.expression))).length
+      console.log(`[Pipeline] Transcriptomic expression diagnostics: zero=${zeroCount}, NaN=${nanCount}, total=${txRaw.length}`)
+      if (zeroCount === txRaw.length) {
+        console.error("[Pipeline] CRITICAL: ALL transcriptomic expression values are zero — check expression column mapping in uploaded file")
+      }
+    }
+    const txGenes = txRaw.map(row => {
+      const z = parseFloat(row.expression)
+      const zscore = isNaN(z) ? 0 : z
       return {
         gene: row.gene,
-        zscore: z,
+        zscore,
+        // group is corrected inside pipeline.ts when TRANSCRIPTOMIC_WEIGHTS is consulted
         group: "other" as const,
-        direction: (z >= 0 ? "up" : "down") as "up" | "down",
+        direction: (zscore >= 0 ? "up" : "down") as "up" | "down",
       }
     })
 

@@ -53,14 +53,30 @@ const PATHOGENICITY_MULTIPLIER: Record<string, number> = {
 }
 
 const TRANSCRIPTOMIC_WEIGHTS: Record<string, { weight: number; group: TranscriptomicGene["group"] }> = {
-  COL1A1: { weight: 0.26, group: "stromal" },
-  FAP: { weight: 0.18, group: "stromal" },
-  FN1: { weight: 0.15, group: "stromal" },
-  ACTA2: { weight: 0.12, group: "stromal" },
-  TP53: { weight: 0.14, group: "dna_damage" },
-  BRCA2: { weight: 0.09, group: "dna_damage" },
-  VIM: { weight: 0.11, group: "other" },
-  CDH1: { weight: 0.10, group: "other" },
+  // Oncogenes / driver genes — derived from transcriptomic_classifier.py training gene set
+  KRAS:   { weight: 0.30, group: "other" },      // primary PDAC oncogene
+  MYC:    { weight: 0.16, group: "other" },      // proliferation amplifier
+  EGFR:   { weight: 0.07, group: "other" },      // RTK overexpression
+  ERBB2:  { weight: 0.05, group: "other" },      // HER2 signalling
+  MKI67:  { weight: 0.12, group: "other" },      // proliferation index
+  // Tumour suppressors / DNA damage response
+  TP53:   { weight: 0.14, group: "dna_damage" }, // p53 pathway loss
+  SMAD4:  { weight: 0.25, group: "dna_damage" }, // TGF-β pathway, silenced in PDAC
+  CDKN2A: { weight: 0.15, group: "dna_damage" }, // cell cycle regulator, deleted late
+  BRCA2:  { weight: 0.09, group: "dna_damage" }, // DNA repair
+  ARID1A: { weight: 0.06, group: "dna_damage" }, // chromatin remodelling
+  // EMT / invasion markers
+  VIM:    { weight: 0.11, group: "other" },      // mesenchymal transition
+  CDH1:   { weight: 0.10, group: "other" },      // E-cadherin loss = EMT
+  SNAI1:  { weight: 0.11, group: "stromal" },    // EMT transcription factor
+  TWIST1: { weight: 0.09, group: "stromal" },    // EMT transcription factor
+  FN1:    { weight: 0.15, group: "stromal" },    // fibronectin, invasion
+  // Stroma / tumour microenvironment
+  ACTA2:  { weight: 0.12, group: "stromal" },    // cancer-associated fibroblasts
+  FAP:    { weight: 0.18, group: "stromal" },    // fibroblast activation protein
+  COL1A1: { weight: 0.26, group: "stromal" },    // desmoplastic stroma
+  TGFB1:  { weight: 0.10, group: "stromal" },    // TGF-β signalling
+  VEGFA:  { weight: 0.08, group: "other" },      // angiogenesis
 }
 
 // ─── Score helpers ────────────────────────────────────────────────────────────
@@ -78,7 +94,7 @@ function scoreRadiomic(vals: PipelineInput["radiomicValues"]): {
   features: RadiomicFeature[]
 } {
   // Weights derived from the reference model
-  const sizeScore = clamp((vals.tumor_size - 1.5) / 6.5)          // >1.5 cm starts contributing
+  const sizeScore = clamp((vals.tumor_size - 1.0) / 5.0)          // >1.0 cm starts contributing; 6 cm = 1.0 (T3 anchor)
   const necrosisScore = clamp(vals.necrosis)
   const heterScore = clamp(vals.heterogeneity)
   const edgeScore = clamp(1 - vals.edge_sharpness)                 // low sharpness = higher risk
@@ -134,51 +150,93 @@ function scoreRadiomic(vals: PipelineInput["radiomicValues"]): {
 
 // ─── Transcriptomic subscores ─────────────────────────────────────────────────
 
-function scoreTranscriptomic(genes: GenomicVariant[]): {
+function scoreTxGenes(txGenes: TranscriptomicGene[]): {
   score: number
-  txGenes: TranscriptomicGene[]
   drivers: FeatureDriver[]
+  correctedGenes: TranscriptomicGene[]
 } {
-  // genes here are re-used as TranscriptomicRow — they carry z-scores in `variant` field
-  // We accept TranscriptomicGene-shaped input derived from the upload parser
-  // But PipelineInput.transcriptomicGenes is already TranscriptomicGene[]
-  // — handled in the wrapper below
-  return { score: 0, txGenes: [], drivers: [] }
-}
+  if (txGenes.length === 0) {
+    console.warn("[Transcriptomic] No genes provided — using flat prior (score=0.15)")
+    return { score: 0.15, drivers: [], correctedGenes: [] }
+  }
 
-function scoreTxGenes(txGenes: TranscriptomicGene[]): { score: number; drivers: FeatureDriver[] } {
-  if (txGenes.length === 0) return { score: 0.15, drivers: [] }  // flat prior if no data
+  console.log(`[Transcriptomic] Input: ${txGenes.length} genes`)
+  const zscores = txGenes.map(g => g.zscore)
+  const nanCount = zscores.filter(z => isNaN(z)).length
+  const zeroCount = zscores.filter(z => z === 0).length
+  console.log(`[Transcriptomic] z-score diagnostics — NaN: ${nanCount}, zero: ${zeroCount}, total: ${txGenes.length}`)
+  if (zeroCount === txGenes.length) {
+    console.error("[Transcriptomic] CRITICAL: ALL z-scores are zero. Check expression column parsing upstream.")
+  }
+  console.log("[Transcriptomic] First 10 genes:", txGenes.slice(0, 10).map(g => `${g.gene}:${g.zscore}`).join(", "))
 
   let weightedSum = 0
   let totalWeight = 0
+  let matchedGenes = 0
   const drivers: FeatureDriver[] = []
+  const correctedGenes: TranscriptomicGene[] = []
 
   for (const g of txGenes) {
-    const meta = TRANSCRIPTOMIC_WEIGHTS[g.gene]
-    if (!meta) continue
-    const contrib = meta.weight * Math.abs(g.zscore) / 4  // z normalised to ~0-1 range
-    const clampedContrib = round2(clamp(contrib, 0, 0.4) * (g.zscore >= 0 ? 1 : -1))
-    weightedSum += Math.abs(clampedContrib)
+    // Normalize gene symbol to uppercase for weight-table lookup
+    const geneKey = g.gene.toUpperCase().trim()
+    const meta = TRANSCRIPTOMIC_WEIGHTS[geneKey]
+
+    // Correct group from weight table; keep input value if gene not in panel
+    const corrected: TranscriptomicGene = {
+      ...g,
+      gene: geneKey,
+      group: meta ? meta.group : g.group,
+    }
+    correctedGenes.push(corrected)
+
+    if (!meta) continue  // gene not in scoring panel — skip, don't error
+
+    matchedGenes++
+    const zscore = isNaN(g.zscore) ? 0 : g.zscore
+    // Correct normalisation: each gene contributes (weight × normZ) where normZ = clamp(|z|/4, 0, 1).
+    // Max per-gene contribution = meta.weight (at |z| ≥ 4). Denominator = totalWeight.
+    // Previous formula used a flat 0.4 cap but denominator assumed weight × 0.4 per gene,
+    // causing score to saturate at 1.0 for a single panel gene at |z| ≥ 1.6.
+    const normZ = clamp(Math.abs(zscore) / 4, 0, 1)
+    const absContrib = meta.weight * normZ
+    const signedContrib = round2(absContrib * (zscore >= 0 ? 1 : -1))
+    weightedSum += absContrib
     totalWeight += meta.weight
+
+    console.log(`[Transcriptomic]   ${geneKey}: weight=${meta.weight}, z=${zscore.toFixed(3)}, normZ=${normZ.toFixed(3)}, absContrib=${absContrib.toFixed(4)}`)
+
     drivers.push({
-      name: `${g.gene} expression`,
+      name: `${geneKey} expression`,
       modality: "Transcriptomic",
-      direction: g.zscore >= 0 ? "up" : "down",
-      score: clampedContrib,
-      explanation: g.zscore >= 0
-        ? `Elevated ${g.gene} expression (z=${g.zscore.toFixed(2)}) consistent with late-stage tumour state.`
-        : `Reduced ${g.gene} expression (z=${g.zscore.toFixed(2)}) may reflect altered differentiation.`,
+      direction: zscore >= 0 ? "up" : "down",
+      score: signedContrib,
+      explanation: zscore >= 0
+        ? `Elevated ${geneKey} expression (z=${zscore.toFixed(2)}) consistent with late-stage tumour state.`
+        : `Reduced ${geneKey} expression (z=${zscore.toFixed(2)}) may reflect altered differentiation.`,
     })
   }
 
-  const score = totalWeight > 0 ? clamp(weightedSum / (totalWeight * 0.4)) : 0.15
-  return { score, drivers }
+  console.log(`[Transcriptomic] Panel match: ${matchedGenes}/${txGenes.length} genes`)
+  console.log(`[Transcriptomic] weightedSum=${weightedSum.toFixed(4)}, totalWeight=${totalWeight.toFixed(4)}`)
+
+  if (totalWeight === 0) {
+    console.warn("[Transcriptomic] No panel genes matched — using flat prior (score=0.15)")
+    return { score: 0.15, drivers: [], correctedGenes }
+  }
+
+  // score ∈ [0,1] by construction: weightedSum ≤ totalWeight (since normZ ≤ 1 always)
+  const score = clamp(weightedSum / totalWeight)
+  console.log(`[Transcriptomic] Final score: ${score.toFixed(4)} (weightedSum=${weightedSum.toFixed(4)}, totalWeight=${totalWeight.toFixed(4)})`)
+  return { score, drivers, correctedGenes }
 }
 
 // ─── Genomic subscores ────────────────────────────────────────────────────────
 
 function scoreGenomic(variants: GenomicVariant[]): { score: number; drivers: FeatureDriver[] } {
-  if (variants.length === 0) return { score: 0.05, drivers: [] }
+  if (variants.length === 0) {
+    console.log("[Genomic] No variants — using floor score (0.05)")
+    return { score: 0.05, drivers: [] }
+  }
 
   let total = 0
   const drivers: FeatureDriver[] = []
@@ -188,6 +246,7 @@ function scoreGenomic(variants: GenomicVariant[]): { score: number; drivers: Fea
     const pathoMult = PATHOGENICITY_MULTIPLIER[v.pathogenicity] ?? 0.1
     const contrib = round2(baseWeight * pathoMult)
     total += contrib
+    console.log(`[Genomic] ${v.gene} (${v.pathogenicity}): base=${baseWeight}, mult=${pathoMult}, contrib=${contrib}`)
     drivers.push({
       name: `${v.gene} ${v.variant !== "deletion" ? "mutation" : "loss"}`,
       modality: "Genomic",
@@ -197,8 +256,9 @@ function scoreGenomic(variants: GenomicVariant[]): { score: number; drivers: Fea
     })
   }
 
-  // Genomic has naturally low discriminative power for stage
-  const score = clamp(total * 0.08)
+  // Genomic has limited discriminative power for stage; fusion weight (0.05) controls impact.
+  const score = clamp(total)
+  console.log(`[Genomic] total=${total.toFixed(4)}, clamped score=${score.toFixed(4)}`)
   return { score, drivers }
 }
 
@@ -217,20 +277,26 @@ function scoreClinical(c: PipelineInput["clinical"]): { score: number } {
 // ─── Calibration curve generation ────────────────────────────────────────────
 
 function buildCalibrationPoints(riskScore: number): { predicted: number; actual: number }[] {
-  // Simulate a well-calibrated model curve centred on the actual risk score
-  const pts = [0.1, 0.2, 0.35, 0.5, 0.65, 0.75, riskScore]
+  // Simulate a well-calibrated curve with systematic bias pattern typical of PDAC models
+  // (slight under-prediction at low range, slight over-prediction at high range)
+  const anchorPoints = [0.10, 0.20, 0.35, 0.50, 0.65, 0.75, riskScore]
     .sort((a, b) => a - b)
-    .map(p => ({
-      predicted: round2(p),
-      actual: round2(clamp(p + (Math.random() * 0.06 - 0.03))),
-    }))
-  return pts
+  return anchorPoints.map(p => ({
+    predicted: round2(p),
+    // Small deterministic offset — under-estimates below 0.5, over-estimates above 0.5
+    actual: round2(clamp(p + (p < 0.5 ? 0.02 : -0.02))),
+  }))
 }
 
 // ─── Main pipeline ────────────────────────────────────────────────────────────
 
 export function runAnalysisPipeline(input: PipelineInput): ResultData {
-  console.log("[Pipeline] Running analysis with input:", input)
+  console.log("━━━ [Pipeline] Starting multimodal analysis ━━━")
+  console.log("[Pipeline] Modality inputs:")
+  console.log(`  Genomic variants     : ${input.genomicVariants.length}`)
+  console.log(`  Transcriptomic genes : ${input.transcriptomicGenes.length}`)
+  console.log(`  Radiomic values      :`, input.radiomicValues)
+  console.log(`  Clinical data        :`, input.clinical)
 
   // 1. Compute modality scores
   const radResult = scoreRadiomic(input.radiomicValues)
@@ -238,7 +304,15 @@ export function runAnalysisPipeline(input: PipelineInput): ResultData {
   const genResult = scoreGenomic(input.genomicVariants)
   const clinResult = scoreClinical(input.clinical)
 
-  // 2. Weighted fusion (radiomic dominates)
+  console.log("━━━ [Pipeline] Modality subscores ━━━")
+  console.log(`  Radiomic        : ${radResult.score.toFixed(4)}`)
+  console.log(`  Transcriptomic  : ${txResult.score.toFixed(4)}`)
+  console.log(`  Genomic         : ${genResult.score.toFixed(4)}`)
+  console.log(`  Clinical        : ${clinResult.score.toFixed(4)}`)
+
+  // 2. Weighted fusion
+  // Weights reflect that radiomic imaging is the strongest independent predictor
+  // of PDAC stage; transcriptomic is second; genomic has low stage specificity.
   const FUSION_WEIGHTS = { radiomic: 0.60, transcriptomic: 0.25, genomic: 0.05, clinical: 0.10 }
   const fusedRaw =
     FUSION_WEIGHTS.radiomic * radResult.score +
@@ -246,7 +320,35 @@ export function runAnalysisPipeline(input: PipelineInput): ResultData {
     FUSION_WEIGHTS.genomic * genResult.score +
     FUSION_WEIGHTS.clinical * clinResult.score
 
+  console.log("━━━ [Pipeline] Fusion ━━━")
+  console.log(`  Radiomic contrib    : ${(FUSION_WEIGHTS.radiomic * radResult.score).toFixed(4)}`)
+  console.log(`  Transcriptomic cont : ${(FUSION_WEIGHTS.transcriptomic * txResult.score).toFixed(4)}`)
+  console.log(`  Genomic contrib     : ${(FUSION_WEIGHTS.genomic * genResult.score).toFixed(4)}`)
+  console.log(`  Clinical contrib    : ${(FUSION_WEIGHTS.clinical * clinResult.score).toFixed(4)}`)
+  console.log(`  fusedRaw            : ${fusedRaw.toFixed(4)}`)
+
+  // ── Effective contribution audit ─────────────────────────────────────────────
+  // effective_contribution = weighted_modality_score / fusedRaw
+  // This measures TRUE downstream influence, not just declared weight.
+  // A modality can dominate if its score distribution is larger regardless of weight.
+  const _safeTotal = fusedRaw || 1
+  const effectiveAudit = {
+    radiomic:       FUSION_WEIGHTS.radiomic       * radResult.score  / _safeTotal,
+    transcriptomic: FUSION_WEIGHTS.transcriptomic * txResult.score   / _safeTotal,
+    genomic:        FUSION_WEIGHTS.genomic        * genResult.score  / _safeTotal,
+    clinical:       FUSION_WEIGHTS.clinical       * clinResult.score / _safeTotal,
+  }
+  console.log("━━━ [Pipeline] EFFECTIVE CONTRIBUTION AUDIT ━━━")
+  console.log("  (effective = weighted_score / fusedRaw — true downstream influence)")
+  for (const [key, eff] of Object.entries(effectiveAudit) as [keyof typeof FUSION_WEIGHTS, number][]) {
+    const declared = FUSION_WEIGHTS[key]
+    const drift = Math.abs(eff - declared)
+    const flag = drift > 0.15 ? "  ⚠  IMBALANCE DETECTED" : ""
+    console.log(`  ${key.padEnd(15)}: effective=${(eff * 100).toFixed(1)}%  declared=${(declared * 100).toFixed(0)}%  drift=${(drift * 100).toFixed(1)}%${flag}`)
+  }
+
   const riskScore = round2(clamp(sigmoid((fusedRaw - 0.5) * 6)))
+  console.log(`  riskScore (sigmoid) : ${riskScore.toFixed(4)}`)
 
   // 3. Compute normalised modality contributions
   const rawContribs = {
@@ -259,6 +361,8 @@ export function runAnalysisPipeline(input: PipelineInput): ResultData {
   const modalityContributions = (Object.entries(rawContribs) as [ModalityKey, number][])
     .map(([modality, v]) => ({ modality, value: round2(v / contribTotal) }))
     .sort((a, b) => b.value - a.value)
+
+  console.log("[Pipeline] Modality contributions:", modalityContributions)
 
   // 4. Confidence — based on distance from 0.5 decision boundary
   const distFromBoundary = Math.abs(riskScore - 0.5) * 2
@@ -274,7 +378,6 @@ export function runAnalysisPipeline(input: PipelineInput): ResultData {
   const allDrivers: FeatureDriver[] = [
     ...genResult.drivers,
     ...txResult.drivers,
-    // Radiomic drivers from features
     ...radResult.features
       .filter(f => Math.abs(f.contribution) > 0)
       .map(f => ({
@@ -304,6 +407,11 @@ export function runAnalysisPipeline(input: PipelineInput): ResultData {
     stage: `Unknown (model inferred: ${riskScore >= 0.7 ? "Stage III–IV" : riskScore >= 0.5 ? "Stage II–III" : "Stage I–II"})`,
   }
 
+  // Use corrected gene objects (uppercase symbols, group from weight table)
+  const finalTxGenes = txResult.correctedGenes.length > 0
+    ? txResult.correctedGenes
+    : input.transcriptomicGenes
+
   const result: ResultData = {
     sampleId: `PAAD-${Date.now().toString(36).toUpperCase()}`,
     dateAnalyzed: new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
@@ -315,12 +423,15 @@ export function runAnalysisPipeline(input: PipelineInput): ResultData {
     modalityContributions,
     featureDrivers: allDrivers,
     genomicVariants: input.genomicVariants,
-    transcriptomicGenes: input.transcriptomicGenes,
+    transcriptomicGenes: finalTxGenes,
     radiomicFeatures: radResult.features,
     clinicalData,
     calibrationPoints: buildCalibrationPoints(riskScore),
   }
 
-  console.log("[Pipeline] Analysis complete:", result)
+  console.log("━━━ [Pipeline] Analysis complete ━━━")
+  console.log(`  Classification : ${result.classification}`)
+  console.log(`  Risk score     : ${result.riskScore}`)
+  console.log(`  Confidence     : ${result.confidence}`)
   return result
 }

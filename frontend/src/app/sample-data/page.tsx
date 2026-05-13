@@ -593,7 +593,7 @@ const DOWNLOAD_FILES = [
   {
     label: "Download Genomic Data",
     ext: ".tsv — mutations · PAAD-SAMPLE-001",
-    href: "/sample-data/genomic/PAAD-SAMPLE-001_mutations.tsv",
+    href: "/public/sample-data/genomic/PAAD-SAMPLE-001_mutations.tsv",
     download: "PAAD-SAMPLE-001_mutations.tsv",
     icon: <DownloadIcon />,
     primary: true,
@@ -601,7 +601,7 @@ const DOWNLOAD_FILES = [
   {
     label: "Download Transcriptomic Data",
     ext: ".tsv — expression · PAAD-SAMPLE-001",
-    href: "/sample-data/transcriptomic/PAAD-SAMPLE-001_transcriptomics.tsv",
+    href: "/public/sample-data/transcriptomic/PAAD-SAMPLE-001_transcriptomics.tsv",
     download: "PAAD-SAMPLE-001_transcriptomics.tsv",
     icon: <DownloadIcon />,
     primary: false,
@@ -609,7 +609,7 @@ const DOWNLOAD_FILES = [
   {
     label: "Download Radiomic Sample",
     ext: ".dcm — CT scan DICOM slice · C3L-02118",
-    href: "/sample-data/radiomic/C3L-02118/1-001.dcm",
+    href: "public/sample-data/radiomic/1-001.dcm",
     download: "1-001.dcm",
     icon: <DownloadIcon />,
     primary: false,
@@ -620,14 +620,14 @@ const EXTRA_SAMPLES = [
   {
     label: "Early-stage sample (PAAD-003)",
     desc: "Stage IB · Classical subtype · Low-Moderate risk · best prognosis of cohort",
-    href: "/sample-data/genomic/PAAD-SAMPLE-003_mutations.tsv",
-    download: "PAAD-SAMPLE-003_mutations.tsv",
+    href: "public/sample-data/genomic/PAAD-SAMPLE-002_mutations.tsv",
+    download: "PAAD-SAMPLE-002_mutations.tsv",
   },
   {
     label: "Late-stage sample (PAAD-004)",
     desc: "Stage IV · Basal-like · Very High risk · full EMT + immune evasion signature",
-    href: "/sample-data/genomic/PAAD-SAMPLE-004_mutations.tsv",
-    download: "PAAD-SAMPLE-004_mutations.tsv",
+    href: "public/sample-data/genomic/PAAD-SAMPLE-002_mutations.tsv",
+    download: "PAAD-SAMPLE-002_mutations.tsv",
   },
 ]
 
